@@ -1,1 +1,85 @@
-<p>review works!</p>
+<div class="review">
+    <span class="custom" style="float: right;">Account Type: RRSP</span>
+    <div class="row">
+        <h2>Review Your Information</h2>
+        <p style="font-size: 14px;">Please take a few minitues to carefully review your application. Make sure its
+            accurate you won't able to change once submittion done.</p>
+    </div>
+    <div class="account">
+        <span class="info-type">Account Selection</span>
+        <button mat-raised-button color="warn" style="float: right;" [routerLink]="['/account']">EDIT</button>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Options Trading:</h3>
+                <span class="custom">yes</span>
+            </div>
+            <div class="col-md-4">
+                <h3>Years Of Experience In Trading:</h3>
+                <span class="custom">5</span>
+
+            </div>
+            <div class="col-md-4">
+                <h3>Options Trading Knowledge</h3>
+                <span class="custom">Limited</span>
+
+            </div>
+
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-4">
+                <h3>Types Of Trading Options You have done:</h3>
+                <span class="custom">Type1 </span>
+            </div>
+            <div class="col-md-4">
+                <h3>Types Of Trading Options You Would like to trade:</h3>
+                <span class="custom">Type2</span>
+
+            </div>
+            <div class="col-md-4">
+                <h3>Promo Code:</h3>
+                <span class="custom">None</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="personal-info" *ngIf="personalInfoObj?.firstName">
+        <span class="info-type">Personal Information</span>
+        <button mat-raised-button color="warn" style="float: right;" [routerLink]="['/personal']">EDIT</button>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Applicant's Legal Name:</h3>
+                <span class="custom">{{personalInfoObj?.firstName}}</span>
+            </div>
+            <div class="col-md-6">
+                <h3>Date of Birth</h3>
+                <span class="custom">{{personalInfoObj?.dob | date}}</span>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6">
+                <h3>Citizenship:</h3>
+                <span class="custom">{{personalInfoObj?.citizen}} </span>
+            </div>
+            <div class="col-md-6">
+                <h3>InsuranceNo:</h3>
+                <span class="custom">{{personalInfoObj?.insuranceNo}}</span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <button  mat-flat-button color="primary" 
+        style="float: right;" (click)="finalSubmit()" *ngIf="personalInfoObj?.firstName">SUBMIT</button>
+</div>
+
+<div class="error-block">
+    <h2 *ngIf="!personalInfoObj?.firstName">Please Mention Personal Information Details</h2>
+</div>

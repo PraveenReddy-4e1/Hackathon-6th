@@ -1,1 +1,11 @@
-<p>header works!</p>
+<div class="row head">
+    <div class="col-md-8">
+      <h1 class="cm-name">BMO</h1>
+    </div>
+    <div class="col-md-4" style="padding: 8px;">
+      <select class="custom-select" (change)="changeLang($event.target.value)">
+          <option value="en" [selected]="lang == 'en'">English</option>
+          <option value="fr" [selected]="lang == 'fr'">Frensh</option>
+      </select>
+  </div>
+</div>

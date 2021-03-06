@@ -1,1 +1,103 @@
-<p>personal works!</p>
+
+<div class="personal-details">
+    <div class="name-part row">
+        <div class="col-md-6">
+            <h2>{{'name' | translate}}</h2>
+            <p class="name-des">{{'name-des' | translate}}</p>
+            <div class="prfix">
+                <h4>Prefix</h4>
+                <nav mat-tab-nav-bar>
+                    <a mat-tab-link *ngFor="let type of types" (click)="activeType = type"
+                        [active]="activeType == type">
+                        {{type}} </a>
+                </nav>
+            </div>
+
+            <form [formGroup]="personalFormGroup" (ngSubmit)="onSubmitPersonalDetails()">
+                <div class="personal-fields mt-15">
+                    <div class="filed">
+                        <mat-form-field appearance="fill">
+                            <mat-label>FirstName</mat-label>
+                            <input matInput placeholder="First Name" #input maxlength="45" formControlName="firstName" required>
+                            <mat-hint >{{input.value?.length || 0}}/45</mat-hint>
+                        </mat-form-field>
+                        <div *ngIf="personalFormGroup.get('firstName').invalid && 
+                        personalFormGroup.get('firstName').touched">
+                            <small class="text-danger" >
+                                This field is required. Enter Only Alphabets
+                            </small>
+                        </div>
+                    </div>
+                    <div class="filed">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Initial(Optional)</mat-label>
+                            <input matInput placeholder="Initial" formControlName="initial">
+                        </mat-form-field>
+                        <div *ngIf="personalFormGroup.get('initial').invalid && 
+                        personalFormGroup.get('initial').touched">
+                            <small class="text-danger">
+                               Enter Only Alphabets
+                            </small>
+                        </div>
+                    </div>
+                    <div class="filed">
+                        <mat-form-field appearance="fill">
+                            <mat-label>LastName</mat-label>
+                            <input matInput placeholder="Last Name" formControlName="lastName" required>
+                        </mat-form-field>
+                        <div *ngIf="personalFormGroup.get('lastName').invalid && 
+                        personalFormGroup.get('lastName').touched">
+                            <small class="text-danger">
+                                This field is required. Enter Only Alphabets
+                            </small>
+                        </div>
+                    </div>
+                    <div class="dob">
+                        <h2>{{'dob' | translate}}</h2>
+                        <p class="name-des">{{'dob-des' | translate}}</p>
+                        <div class="filed">
+                            <mat-form-field appearance="fill">
+                                <mat-label>MM | DD | YYYY</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="dob" required [max]="maxDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="ins-no">
+                        <h2>What's Your Social Insurance Number?</h2>
+                        <div class="filed">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Social Insurance Number</mat-label>
+                                <input type="number" matInput placeholder="Social Insurance Number" formControlName="insuranceNo"
+                                    required (blur)="checkSsn()">
+                            </mat-form-field>
+                            <div *ngIf="inValidSin" style="color: red;">invalid SIN</div>
+                        </div>
+                    </div>
+                    <div class="citizen">
+                        <h2>Are you a Canadian citizen?</h2>
+                        <div class="citizenfiled">
+                            <nav mat-tab-nav-bar>
+                                <a mat-tab-link *ngFor="let type of citizen" (click)="selectedCitizen = type"
+                                    [active]="selectedCitizen == type">
+                                    {{type}} </a>
+                            </nav>
+                        </div>
+                       
+                    </div>
+
+
+                </div>
+
+                <button mat-raised-button color="accent" [disabled]="personalFormGroup.invalid || inValidSin == true" type="submit"
+                style="float: right;">Continue</button>
+        
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
